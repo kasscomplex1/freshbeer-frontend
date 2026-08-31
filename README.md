@@ -13,7 +13,7 @@ This folder (`static/`) is the Cloudflare Pages **build output directory**. No b
 Cloudflare Pages settings:
 - Build command: *(none)*
 - Build output: `static`
-- Custom domain: `fresh.fauluhost.co.tz`
+- Custom domain: `fresh.quick.co.tz`
 
 ## API
 The frontend calls `https://api.fauluhost.co.tz` — see `../freshbeer_api.py` for the backend.
