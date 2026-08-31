@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>FRESH BEER — Scan</title>
+<style>
+:root{--bg:#0a0a0a;--surface:#111;--border:#1a3a1a;--accent:#00ff41;--dim:#6a8a6a;--text:#d4e8d4;--warn:#ffaa00;--bad:#ff4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;max-width:400px;width:100%;margin-bottom:16px}
+h1{color:var(--accent);font-size:1.4em;margin-bottom:8px}
+h2{font-size:1em;color:var(--dim);margin:12px 0 6px;text-transform:uppercase;letter-spacing:1px}
+.born{font-family:monospace;font-size:1.6em;color:var(--accent);text-shadow:0 0 12px rgba(0,255,65,.3);text-align:center;padding:14px;background:#000;border:1px solid var(--border);border-radius:4px;margin:8px 0}
+input,select,button{width:100%;padding:12px;border:1px solid var(--border);background:#000;color:var(--text);font-size:1em;border-radius:4px;font-family:inherit}
+button{background:var(--accent);color:#000;font-weight:700;letter-spacing:1px;cursor:pointer;border:none;margin-top:8px}
+button:active{opacity:.8}
+.result{padding:16px;border-radius:6px;text-align:center;font-weight:700;font-size:1.2em;letter-spacing:1px}
+.fresh{background:rgba(0,255,65,.1);border:1px solid var(--accent);color:var(--accent)}
+.good{background:rgba(255,170,0,.1);border:1px solid var(--warn);color:var(--warn)}
+.bad{background:rgba(255,68,68,.1);border:1px solid var(--bad);color:var(--bad)}
+.score{font-size:2.5em;font-family:monospace;color:var(--accent);font-weight:700}
+.meta{font-size:.85em;color:var(--dim);margin-top:4px}
+.brand{font-family:monospace;color:var(--accent);font-size:.75em;letter-spacing:2px;margin-top:16px;text-align:center}
+.error{color:var(--bad);font-size:.85em;margin-top:8px}
+</style></head><body>
+<div class="card">
+  <h1>🍺 FRESH BEER</h1>
+  <div class="meta">Trace your beer from brewery to glass.</div>
+  <h2>Born On</h2>
+  <div class="born" id="born">—</div>
+  <h2>Outlet</h2>
+  <div class="meta" id="outletMeta">—</div>
+  <h2>How old is this bottle?</h2>
+  <select id="age">
+    <option value="0">Just delivered (0–2 days)</option>
+    <option value="5">On the shelf a few days (3–7)</option>
+    <option value="14">Been here a while (8–21)</option>
+    <option value="30">Old stock (22+)</option>
+  </select>
+  <button onclick="submitScan()">REPORT FRESHNESS</button>
+  <div id="error" style="display:none" class="error"></div>
+  <div id="result" style="display:none" class="result"></div>
+  <div id="score" style="display:none" class="card" style="background:#000;margin-top:16px">
+    <h2>This outlet</h2>
+    <div class="score" id="scoreNum"></div>
+    <div id="scoreBand" class="result"></div>
+    <div class="meta" id="scoreMeta"></div>
+  </div>
+</div>
+<div class="brand">FRESH BEER LAB · TANZANIA</div>
+<script>
+// Config — point at the API origin
+const API = 'https://api.fauluhost.co.tz';
+
+// Read batch + outlet from URL query string
+const params = new URLSearchParams(location.search);
+const batchId = params.get('batch') || '';
+const outletId = params.get('outlet') || '';
+
+document.getElementById('born').textContent = batchId || '—';
+document.getElementById('outletMeta').textContent = outletId || '—';
+
+async function submitScan(){
+  const errEl = document.getElementById('error');
+  errEl.style.display = 'none';
+  if (!batchId || !outletId){
+    errEl.textContent = 'Missing batch or outlet in QR code. Please contact your retailer.';
+    errEl.style.display = 'block';
+    return;
+  }
+  const age = parseInt(document.getElementById('age').value);
+  try {
+    const r = await fetch(API + '/scan', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        batch_id: batchId,
+        outlet_id: outletId,
+        born_on: new Date(Date.now() - age * 86400000).toISOString().slice(0, 10)
+      })
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    if (d.error){ throw new Error(d.error); }
+    const res = document.getElementById('result');
+    res.style.display = 'block';
+    res.className = 'result ' + (d.band === 'FRESH' ? 'fresh' : d.band === 'GOOD' ? 'good' : 'bad');
+    res.textContent = d.band + ' · ' + d.age_days + ' days old';
+    const sc = document.getElementById('score');
+    sc.style.display = 'block';
+    document.getElementById('scoreNum').textContent = d.outlet_score.score;
+    const sb = document.getElementById('scoreBand');
+    sb.className = 'result ' + (d.outlet_score.band.includes('FRESH') ? 'fresh' : d.outlet_score.band.includes('GOOD') ? 'good' : 'bad');
+    sb.textContent = d.outlet_score.band;
+    document.getElementById('scoreMeta').textContent =
+      d.outlet_score.scans + ' scans · ' + d.outlet_score.fresh_pct + '% fresh · avg age ' + d.outlet_score.avg_age_days + ' days';
+  } catch (e){
+    errEl.textContent = 'Could not reach server: ' + e.message;
+    errEl.style.display = 'block';
+  }
+}
+</script>
+</body></html>

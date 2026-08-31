@@ -1,0 +1,68 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FRESH BEER LAB</title>
+<style>
+body{margin:0;font-family:system-ui;background:#0a0a0a;color:#d4e8d4;min-height:100vh;padding:40px 20px}
+.c{max-width:800px;margin:0 auto}
+h1{color:#00ff41;font-size:2.5em;letter-spacing:4px;font-family:monospace;text-shadow:0 0 30px rgba(0,255,65,.3);margin-bottom:4px}
+.s{color:#6a8a6a;font-size:1.1em;margin:0 0 30px}
+.box{border:1px solid #1a3a1a;background:#111;padding:20px;margin:14px 0;border-radius:6px}
+.box h3{color:#00ff41;font-size:1.1em;margin-bottom:8px;font-family:monospace}
+code{color:#00ff41;font-family:monospace;background:#000;padding:2px 6px;border-radius:3px}
+a{color:#00ff41}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.btn{display:inline-block;padding:10px 18px;background:#00ff41;color:#000;font-weight:700;border-radius:4px;text-decoration:none;letter-spacing:1px;font-size:.9em}
+.btn.outline{background:transparent;border:1px solid #00ff41;color:#00ff41}
+</style></head><body><div class="c">
+<h1>🍺 FRESH BEER LAB</h1>
+<div class="s">Tanzania · born-on-date · outlet freshness · proof of concept</div>
+
+<div class="box">
+<h3>What this is</h3>
+<p>Working prototype of a brewery-to-glass freshness platform. Every batch gets a "Born On" date. Every outlet gets a freshness score. Every scan proves the chain. Built for the Disruption Lab workshop.</p>
+</div>
+
+<div class="box">
+<h3>Try the scan flow</h3>
+<p>Open the scan page with batch + outlet IDs pre-filled (this is what a QR code does automatically):</p>
+<code style="display:block;padding:10px;margin:8px 0">/scan/?batch=B-FRESH01&outlet=O-MAMA001</code>
+<div class="row">
+  <a class="btn" href="/scan/?batch=B-FRESH01&outlet=O-MAMA001">Open Scan Page</a>
+</div>
+</div>
+
+<div class="box">
+<h3>See a sample badge</h3>
+<p>Each outlet gets a shareable "FRESH SERVE CERTIFIED" graphic. Useful for WhatsApp, Instagram, menus.</p>
+<div class="row">
+  <a class="btn outline" href="/badge/?id=O-MAMA001">View Sample Badge</a>
+</div>
+</div>
+
+<div class="box">
+<h3>How it works</h3>
+<ol style="margin-left:20px;line-height:1.8">
+<li>QR code on every bottle: <code>https://fresh.fauluhost.co.tz/scan/?batch=B-XXXX&outlet=O-XXXX</code></li>
+<li>Customer scans with phone camera → opens this page</li>
+<li>Picks bottle age category → submits</li>
+<li>Sees freshness band (FRESH/GOOD/MOVE IT) + the outlet's score updates live</li>
+<li>Outlets with high scores get the "Fresh Serve Certified" badge to display</li>
+</ol>
+</div>
+
+<div class="box">
+<h3>Architecture</h3>
+<ul style="margin-left:20px;line-height:1.8">
+<li><b>Frontend (this site):</b> Cloudflare Pages at fresh.fauluhost.co.tz — global CDN, free, HTTPS included</li>
+<li><b>Backend API:</b> Python on VPS at api.fauluhost.co.tz:8090 — scan recording + scoring engine</li>
+<li><b>Database:</b> SQLite — fast for thousands of scans, easy to scale later</li>
+</ul>
+</div>
+
+<div class="box">
+<h3>Status</h3>
+<p>✅ Working prototype. Ready for workshop demo. Next steps: real QR stickers, WhatsApp deep link, beer-lab voting.</p>
+</div>
+
+</div></body></html>
