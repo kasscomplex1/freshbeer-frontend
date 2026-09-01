@@ -9,15 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0a;
-  --surface: #0d1410;
-  --surface-2: #050907;
-  --border: #1a2e1f;
-  --border-bright: #2f5a35;
-  --accent: #39ff7a;
-  --accent-glow: rgba(57, 255, 122, 0.3);
-  --text: #eaffea;
-  --dim: #88a888;
+  --bg: #f4efe6;
+  --surface: #faf6ed;
+  --surface-2: #ece4d2;
+  --border: #d4c9b0;
+  --border-bright: #b8ad94;
+  --accent: #1f5f5b;
+  --accent-2: #3a8a85;
+  --accent-glow: rgba(31, 95, 91, 0.16);
+  --text: #2c3530;
+  --dim: #7a7568;
+  --warn: #c47a3a;
+  --bad: #a04545;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 ::selection { background: var(--accent); color: var(--bg); }
@@ -245,29 +248,29 @@ footer a { color: var(--accent); text-decoration: none; }
   <svg class="bottle-svg" width="280" height="380" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bottle with Born On date">
     <defs>
       <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stop-color="#1a2e1f"/>
-        <stop offset="50%" stop-color="#0d1410"/>
-        <stop offset="100%" stop-color="#1a2e1f"/>
-      </linearGradient>
-      <linearGradient id="bottleHighlight" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="rgba(57,255,122,0.18)"/>
-        <stop offset="100%" stop-color="rgba(57,255,122,0)"/>
-      </linearGradient>
+            <stop offset="0%" stop-color="#e8e0d0"/>
+            <stop offset="50%" stop-color="#f4efe6"/>
+            <stop offset="100%" stop-color="#e8e0d0"/>
+          </linearGradient>
+          <linearGradient id="bottleHighlight" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(31,95,91,0.10)"/>
+            <stop offset="100%" stop-color="rgba(31,95,91,0)"/>
+          </linearGradient>
     </defs>
     <path d="M120 20 L120 50 Q120 60 115 68 Q95 100 95 140 L95 340 Q95 360 115 360 L165 360 Q185 360 185 340 L185 140 Q185 100 165 68 Q160 60 160 50 L160 20 Z"
-          fill="url(#bottleGlass)" stroke="#39ff7a" stroke-width="1.5"/>
-    <rect x="115" y="10" width="50" height="14" fill="#0d1410" stroke="#39ff7a" stroke-width="1.5"/>
+          fill="url(#bottleGlass)" stroke="#1f5f5b" stroke-width="1.5"/>
+    <rect x="115" y="10" width="50" height="14" fill="#ece4d2" stroke="#1f5f5b" stroke-width="1.5"/>
     <path d="M120 20 L120 50 Q120 60 115 68 Q95 100 95 140 L95 280 Q115 270 140 270 Q165 270 185 280 L185 140 Q185 100 165 68 Q160 60 160 50 L160 20 Z"
           fill="url(#bottleHighlight)"/>
-    <rect x="105" y="180" width="70" height="100" fill="#0a0a0a" stroke="#39ff7a" stroke-width="1"/>
-    <line x1="105" y1="190" x2="175" y2="190" stroke="#1f3a23" stroke-width="0.5"/>
-    <line x1="105" y1="270" x2="175" y2="270" stroke="#1f3a23" stroke-width="0.5"/>
-    <text x="140" y="208" text-anchor="middle" fill="#88a888" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">FRESH BEER LAB</text>
-    <text x="140" y="234" text-anchor="middle" fill="#39ff7a" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" letter-spacing="2">BORN ON</text>
-    <text x="140" y="252" text-anchor="middle" fill="#39ff7a" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">31 AUG 2026</text>
-    <text x="140" y="266" text-anchor="middle" fill="#88a888" font-family="JetBrains Mono, monospace" font-size="6" letter-spacing="1.5">DRINK FRESH</text>
-    <line x1="40" y1="350" x2="240" y2="350" stroke="#39ff7a" stroke-width="0.5" opacity="0.3"/>
-    <line x1="35" y1="354" x2="245" y2="354" stroke="#39ff7a" stroke-width="0.5" opacity="0.2"/>
+    <rect x="105" y="180" width="70" height="100" fill="#f4efe6" stroke="#1f5f5b" stroke-width="1"/>
+    <line x1="105" y1="190" x2="175" y2="190" stroke="#d4c9b0" stroke-width="0.5"/>
+    <line x1="105" y1="270" x2="175" y2="270" stroke="#d4c9b0" stroke-width="0.5"/>
+    <text x="140" y="208" text-anchor="middle" fill="#7a7568" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">FRESH BEER LAB</text>
+    <text x="140" y="234" text-anchor="middle" fill="#1f5f5b" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" letter-spacing="2">BORN ON</text>
+    <text x="140" y="252" text-anchor="middle" fill="#1f5f5b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">31 AUG 2026</text>
+    <text x="140" y="266" text-anchor="middle" fill="#7a7568" font-family="JetBrains Mono, monospace" font-size="6" letter-spacing="1.5">DRINK FRESH</text>
+    <line x1="40" y1="350" x2="240" y2="350" stroke="#1f5f5b" stroke-width="0.5" opacity="0.25"/>
+    <line x1="35" y1="354" x2="245" y2="354" stroke="#1f5f5b" stroke-width="0.5" opacity="0.15"/>
   </svg>
   <div class="born-block">
     <div class="k">Today's born</div>
@@ -295,7 +298,7 @@ footer a { color: var(--accent); text-decoration: none; }
 
 <footer>
   <div>Fresh Beer Lab · TZ · 2026</div>
-  <div><a href="https://github.com/kasscomplex1/freshbeer-frontend">source</a></div>
+  <div>Pilot build</div>
 </footer>
 
 </div>
