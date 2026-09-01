@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FRESH BEER LAB — Disruption Lab Tanzania</title>
+<title>BORN ON — Fresh Beer Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -11,173 +11,182 @@
 :root {
   --bg: #0a0a0a;
   --surface: #0d1410;
-  --border: #1f3a23;
+  --surface-2: #050907;
+  --border: #1a2e1f;
   --border-bright: #2f5a35;
   --accent: #39ff7a;
-  --accent-dim: #1f8a3a;
+  --accent-glow: rgba(57, 255, 122, 0.3);
   --text: #eaffea;
   --dim: #88a888;
-  --warn: #ffaa00;
-  --bad: #ff5544;
-  --hairline: 1px solid var(--border);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 ::selection { background: var(--accent); color: var(--bg); }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
   background: var(--bg);
   color: var(--text);
-  line-height: 1.6;
+  line-height: 1.55;
   font-size: 15px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  padding: 64px 24px 96px;
+  padding: 56px 24px 96px;
 }
-.shell { max-width: 880px; margin: 0 auto; }
-header.mast {
-  border-bottom: var(--hairline);
-  padding-bottom: 32px;
-  margin-bottom: 48px;
+.shell { max-width: 920px; margin: 0 auto; }
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 80px;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+}
+.masthead .left { letter-spacing: 0.32em; }
+.masthead .right strong { color: var(--accent); font-weight: 700; }
+
+.hero { margin-bottom: 96px; }
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.4rem, 9vw, 6.4rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+  display: block;
+  font-size: 0.92em;
+}
+.hero .lede {
+  font-size: 1.05rem;
+  color: var(--dim);
+  max-width: 56ch;
+  letter-spacing: -0.005em;
+}
+
+.bottle-stage {
+  margin: 64px 0 96px;
   display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 24px;
-}
-.brand {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.4rem, 6vw, 4rem);
-  letter-spacing: -0.02em;
-  color: var(--accent);
-  line-height: 1;
-}
-.brand-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
-  margin-right: 12px;
-  vertical-align: middle;
-  box-shadow: 0 0 16px rgba(57,255,122,0.6);
-}
-.tagline {
-  color: var(--dim);
-  font-size: 0.85em;
-  letter-spacing: 0.04em;
-  margin-top: 14px;
-  font-weight: 500;
-}
-.timestamp {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  letter-spacing: 0.1em;
-  color: var(--dim);
-  text-align: right;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-.timestamp strong { color: var(--accent); font-weight: 700; }
-nav.toc {
-  border-top: var(--hairline);
-  border-bottom: var(--hairline);
-  padding: 20px 0;
-  margin-bottom: 64px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px;
-  font-size: 0.78em;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-nav.toc a {
-  color: var(--dim);
-  text-decoration: none;
-  transition: color 120ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-nav.toc a:hover { color: var(--accent); }
-nav.toc a::before { content: "→ "; opacity: 0.5; }
-section { margin-bottom: 80px; }
-section h2 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  letter-spacing: -0.01em;
-  color: var(--accent);
-  margin-bottom: 28px;
-  display: flex;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
   align-items: center;
-  gap: 12px;
 }
-section h2::before {
-  content: attr(data-num);
-  font-family: 'JetBrains Mono', monospace;
+@media (max-width: 720px) {
+  .bottle-stage { grid-template-columns: 1fr; gap: 32px; }
+}
+.bottle-svg {
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 60px rgba(57, 255, 122, 0.15));
+}
+.born-block {
+  border-top: 1px solid var(--border-bright);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 0;
+}
+.born-block .k {
   font-size: 0.7em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   color: var(--dim);
   font-weight: 500;
-}
-section h3 {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: 0.85em;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--accent-dim);
   margin-bottom: 12px;
 }
-p { max-width: 65ch; margin-bottom: 16px; }
-p strong { color: var(--accent); font-weight: 700; }
-ul.tight, ol.tight { padding-left: 20px; max-width: 65ch; }
-ul.tight li, ol.tight li { margin-bottom: 8px; }
-code {
-  font-family: inherit;
-  font-size: 0.9em;
+.born-block .v {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  letter-spacing: -0.02em;
   color: var(--accent);
-  background: var(--surface);
-  padding: 2px 6px;
-  border: var(--hairline);
+  text-shadow: 0 0 24px var(--accent-glow);
+  line-height: 1;
+  margin-bottom: 16px;
 }
-code.block {
+.born-block .v small {
   display: block;
-  padding: 16px 18px;
-  margin: 16px 0;
-  font-size: 0.85em;
-  overflow-x: auto;
-}
-.flow {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2px;
-  background: var(--border);
-  border: var(--hairline);
-  margin: 24px 0;
-}
-.flow > div {
-  background: var(--surface);
-  padding: 18px 16px;
-  font-size: 0.78em;
-  letter-spacing: 0.04em;
-}
-.flow > div .k {
-  display: block;
+  font-size: 0.32em;
+  letter-spacing: 0.18em;
   color: var(--dim);
+  font-weight: 500;
   text-transform: uppercase;
-  font-size: 0.85em;
-  margin-bottom: 6px;
-  letter-spacing: 0.08em;
+  margin-top: 10px;
+  text-shadow: none;
 }
-.flow > div .v { color: var(--accent); font-weight: 700; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+.born-block .desc {
+  color: var(--dim);
+  font-size: 0.92em;
+  margin-top: 8px;
+  max-width: 42ch;
+}
+
+.strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 96px;
+}
+@media (max-width: 720px) { .strip { grid-template-columns: 1fr 1fr; } }
+.step {
+  padding: 28px 20px 28px 0;
+  border-right: 1px solid var(--border);
+}
+.step:last-child { border-right: 0; }
+.step .n {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 2.2rem;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.step .l {
+  font-size: 0.7em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin-top: 10px;
+  font-weight: 500;
+}
+.step .d {
+  font-size: 0.82em;
+  color: var(--text);
+  margin-top: 14px;
+  max-width: 22ch;
+  opacity: 0.75;
+}
+
+section.manifest { margin-bottom: 96px; }
+section.manifest h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+section.manifest p { max-width: 64ch; margin-bottom: 16px; }
+section.manifest strong { color: var(--accent); font-weight: 700; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0; margin: 32px 0 0; }
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
+  gap: 12px;
+  padding: 18px 28px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 0.82em;
-  letter-spacing: 0.08em;
+  font-size: 0.78em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   border: 2px solid var(--accent);
@@ -186,158 +195,113 @@ code.block {
   transition: all 120ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
-.btn:hover {
-  background: transparent;
-  color: var(--accent);
-}
 .btn.outline {
   background: transparent;
   color: var(--accent);
+  margin-left: -2px;
 }
-.btn.outline:hover {
-  background: var(--accent);
-  color: var(--bg);
-}
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 2px;
-  background: var(--border);
-  border: var(--hairline);
-  margin: 24px 0;
-}
-.metric {
-  background: var(--surface);
-  padding: 20px 18px;
-}
-.metric .n {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 1.8rem;
+.btn:hover { background: var(--text); border-color: var(--text); }
+.btn.outline:hover { background: transparent; color: var(--text); border-color: var(--text); }
+
+code {
+  font-family: inherit;
+  font-size: 0.9em;
   color: var(--accent);
-  letter-spacing: -0.02em;
-  line-height: 1;
+  background: var(--surface-2);
+  padding: 2px 6px;
+  border: 1px solid var(--border);
 }
-.metric .l {
+
+footer {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
   font-size: 0.7em;
+  letter-spacing: 0.16em;
   color: var(--dim);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-top: 8px;
-  font-weight: 500;
-}
-footer {
-  border-top: var(--hairline);
-  padding-top: 32px;
-  margin-top: 80px;
-  font-size: 0.78em;
-  color: var(--dim);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 12px;
+  font-weight: 500;
 }
 footer a { color: var(--accent); text-decoration: none; }
-@media (max-width: 600px) {
-  body { padding: 32px 16px 64px; }
-  header.mast { grid-template-columns: 1fr; }
-  .timestamp { text-align: left; }
-  nav.toc { gap: 16px; }
-}
 </style>
 </head>
 <body>
 <div class="shell">
 
-<header class="mast">
-  <div>
-    <h1 class="brand"><span class="brand-dot"></span>FRESH BEER LAB</h1>
-    <div class="tagline">Born-on-date · outlet freshness · proof of chain.</div>
-  </div>
-  <div class="timestamp">
-    <strong>TANZANIA</strong><br>
-    Workshop Build · 2026
-  </div>
+<header class="masthead">
+  <div class="left">Fresh Beer Lab</div>
+  <div class="right"><strong>Tanzania</strong> · 2026</div>
 </header>
 
-<nav class="toc">
-  <a href="#brief">The Brief</a>
-  <a href="#flow">Try It</a>
-  <a href="#proof">How It Works</a>
-  <a href="#stack">Architecture</a>
-  <a href="#status">Status</a>
+<section class="hero">
+  <h1>Born on,<em>not best before.</em></h1>
+  <p class="lede">Every bottle gets a date. Every outlet gets a score. Discipline becomes the brand.</p>
+</section>
+
+<section class="bottle-stage">
+  <svg class="bottle-svg" width="280" height="380" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bottle with Born On date">
+    <defs>
+      <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#1a2e1f"/>
+        <stop offset="50%" stop-color="#0d1410"/>
+        <stop offset="100%" stop-color="#1a2e1f"/>
+      </linearGradient>
+      <linearGradient id="bottleHighlight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(57,255,122,0.18)"/>
+        <stop offset="100%" stop-color="rgba(57,255,122,0)"/>
+      </linearGradient>
+    </defs>
+    <path d="M120 20 L120 50 Q120 60 115 68 Q95 100 95 140 L95 340 Q95 360 115 360 L165 360 Q185 360 185 340 L185 140 Q185 100 165 68 Q160 60 160 50 L160 20 Z"
+          fill="url(#bottleGlass)" stroke="#39ff7a" stroke-width="1.5"/>
+    <rect x="115" y="10" width="50" height="14" fill="#0d1410" stroke="#39ff7a" stroke-width="1.5"/>
+    <path d="M120 20 L120 50 Q120 60 115 68 Q95 100 95 140 L95 280 Q115 270 140 270 Q165 270 185 280 L185 140 Q185 100 165 68 Q160 60 160 50 L160 20 Z"
+          fill="url(#bottleHighlight)"/>
+    <rect x="105" y="180" width="70" height="100" fill="#0a0a0a" stroke="#39ff7a" stroke-width="1"/>
+    <line x1="105" y1="190" x2="175" y2="190" stroke="#1f3a23" stroke-width="0.5"/>
+    <line x1="105" y1="270" x2="175" y2="270" stroke="#1f3a23" stroke-width="0.5"/>
+    <text x="140" y="208" text-anchor="middle" fill="#88a888" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">FRESH BEER LAB</text>
+    <text x="140" y="234" text-anchor="middle" fill="#39ff7a" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" letter-spacing="2">BORN ON</text>
+    <text x="140" y="252" text-anchor="middle" fill="#39ff7a" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">31 AUG 2026</text>
+    <text x="140" y="266" text-anchor="middle" fill="#88a888" font-family="JetBrains Mono, monospace" font-size="6" letter-spacing="1.5">DRINK FRESH</text>
+    <line x1="40" y1="350" x2="240" y2="350" stroke="#39ff7a" stroke-width="0.5" opacity="0.3"/>
+    <line x1="35" y1="354" x2="245" y2="354" stroke="#39ff7a" stroke-width="0.5" opacity="0.2"/>
+  </svg>
+  <div class="born-block">
+    <div class="k">Today's born</div>
+    <div class="v" id="todayBorn">31 AUG 2026<small>Born today, drink fresh</small></div>
+    <p class="desc">If your bottle is older than 9 days, it shouldn't be on the shelf. The QR proves the chain.</p>
+  </div>
+</section>
+
+<nav class="strip" aria-label="The chain">
+  <div class="step"><div class="n">01</div><div class="l">Born</div><div class="d">Bottle gets a date at the brewery, stamped on the label.</div></div>
+  <div class="step"><div class="n">02</div><div class="l">Tracked</div><div class="d">Distributors scan movement. No silent warehouse aging.</div></div>
+  <div class="step"><div class="n">03</div><div class="l">Scored</div><div class="d">Every outlet gets a freshness score that updates live.</div></div>
+  <div class="step"><div class="n">04</div><div class="l">Verified</div><div class="d">Customer scans QR, sees the chain in real time.</div></div>
 </nav>
 
-<section id="brief">
-  <h2 data-num="01">The Brief</h2>
-  <p>A working prototype of a brewery-to-glass <strong>freshness platform</strong>. Every batch carries a "Born On" date. Every outlet carries a freshness score. Every scan proves the chain — turning supply-chain discipline into the brand itself.</p>
-  <p>Built for the <strong>Disruption Lab</strong> workshop. Sister brings the brand. The platform is the moat.</p>
-
-  <div class="metrics">
-    <div class="metric"><div class="n">9</div><div class="l">Days Max Fresh</div></div>
-    <div class="metric"><div class="n">0–100</div><div class="l">Outlet Score</div></div>
-    <div class="metric"><div class="n">100%</div><div class="l">Traceable</div></div>
-    <div class="metric"><div class="n">1</div><div class="l">Source of Truth</div></div>
-  </div>
-</section>
-
-<section id="flow">
-  <h2 data-num="02">Try It</h2>
-
-  <h3>Scan Flow</h3>
-  <p>Open the mobile scan page with batch + outlet pre-filled — this is what a QR code does automatically:</p>
-  <code class="block">/scan/?batch=B-FRESH01&outlet=O-MAMA001</code>
+<section class="manifest">
+  <h2>How it works</h2>
+  <p>QR on every bottle points to <code>fresh.quick.co.tz/scan/?batch=…&outlet=…</code>. Customer scans → server returns the bottle's age, freshness band, and the outlet's score.</p>
+  <p>Outlets with high scores earn the <strong>Fresh Serve Certified</strong> badge. Distribution discipline becomes a marketing asset — not a cost.</p>
   <div class="actions">
-    <a class="btn" href="/scan/?batch=B-FRESH01&outlet=O-MAMA001">Open Scan Page →</a>
+    <a class="btn" href="/scan/?batch=B-FRESH01&outlet=O-MAMA001">Open scan demo →</a>
+    <a class="btn outline" href="/badge/?id=O-MAMA001">Sample badge</a>
   </div>
-
-  <h3 style="margin-top:40px">Outlet Badge</h3>
-  <p>Each outlet gets a shareable <strong>FRESH SERVE CERTIFIED</strong> graphic — for WhatsApp, Instagram, menus, doors.</p>
-  <div class="actions">
-    <a class="btn outline" href="/badge/?id=O-MAMA001">View Sample Badge</a>
-  </div>
-</section>
-
-<section id="proof">
-  <h2 data-num="03">How It Works</h2>
-  <div class="flow">
-    <div><span class="k">01 · Brewery</span><span class="v">Born</span><br>Bottle gets a Born On date</div>
-    <div><span class="k">02 · Distributor</span><span class="v">Tracked</span><br>QR scans record movement</div>
-    <div><span class="k">03 · Outlet</span><span class="v">Scored</span><br>Freshness score updates live</div>
-    <div><span class="k">04 · Consumer</span><span class="v">Verified</span><br>Scans QR, sees real age</div>
-  </div>
-
-  <h3 style="margin-top:32px">The Chain</h3>
-  <ol class="tight">
-    <li>QR on every bottle points to <code>https://fresh.quick.co.tz/scan/?batch=B-XXXX&outlet=O-XXXX</code></li>
-    <li>Customer scans → opens the mobile page → picks bottle age category</li>
-    <li>Submits → server returns <strong>FRESH</strong> / <strong>GOOD</strong> / <strong>MOVE IT</strong> + outlet score</li>
-    <li>Outlets with high scores earn the <strong>Fresh Serve Certified</strong> badge to display</li>
-    <li>Distribution discipline becomes a marketing asset, not a cost</li>
-  </ol>
-</section>
-
-<section id="stack">
-  <h2 data-num="04">Architecture</h2>
-  <ul class="tight">
-    <li><strong>Frontend</strong> — Cloudflare Pages at <code>fresh.quick.co.tz</code>. Global CDN. HTTPS. Free.</li>
-    <li><strong>Backend API</strong> — Python on VPS at <code>api.fauluhost.co.tz:8090</code>. Scan recording + scoring engine.</li>
-    <li><strong>Database</strong> — SQLite. Fast for thousands of scans, easy to scale.</li>
-    <li><strong>Score formula</strong> — 50% fresh % · 30% average age (younger better) · 20% recency of last scan.</li>
-  </ul>
-</section>
-
-<section id="status">
-  <h2 data-num="05">Status</h2>
-  <p><strong>Working prototype.</strong> Ready for workshop demo. Seed data in place — register batches and outlets from the API, scan to populate the leaderboard.</p>
-  <p><strong>Next:</strong> real QR stickers, WhatsApp deep link, Beer Lab voting, distributor tier scoring.</p>
 </section>
 
 <footer>
-  <div>FRESH BEER LAB · TZS pilot · 2026</div>
-  <div>Built by Kira for Kasscomplex · <a href="https://github.com/kasscomplex1/freshbeer-frontend">source</a></div>
+  <div>Fresh Beer Lab · TZ · 2026</div>
+  <div><a href="https://github.com/kasscomplex1/freshbeer-frontend">source</a></div>
 </footer>
 
 </div>
+<script>
+document.getElementById('todayBorn').firstChild.textContent =
+  new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+</script>
 </body>
 </html>
