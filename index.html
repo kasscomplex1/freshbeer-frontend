@@ -17,11 +17,9 @@
   --border-bright: #b8ad94;
   --accent: #1f5f5b;
   --accent-2: #3a8a85;
-  --accent-glow: rgba(31, 95, 91, 0.16);
+  --accent-glow: rgba(31, 95, 91, 0.18);
   --text: #2c3530;
   --dim: #7a7568;
-  --warn: #c47a3a;
-  --bad: #a04545;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 ::selection { background: var(--accent); color: var(--bg); }
@@ -34,35 +32,35 @@ body {
   font-size: 15px;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  padding: 56px 24px 96px;
+  -webkit-tap-highlight-color: transparent;
+  padding: 28px 16px 56px;
 }
-.shell { max-width: 920px; margin: 0 auto; }
+.shell { max-width: 440px; width: 100%; margin: 0 auto; }
 
-.masthead {
+.brand-bar {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 16px;
-  margin-bottom: 80px;
+  align-items: center;
   font-size: 0.7em;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--dim);
   font-weight: 500;
+  padding-bottom: 14px;
+  margin-bottom: 48px;
 }
-.masthead .left { letter-spacing: 0.32em; }
-.masthead .right strong { color: var(--accent); font-weight: 700; }
+.brand-bar strong { color: var(--accent); font-weight: 700; letter-spacing: 0.32em; }
 
-.hero { margin-bottom: 96px; }
+/* Hero */
+.hero { margin-bottom: 48px; }
 .hero h1 {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: clamp(3.4rem, 9vw, 6.4rem);
+  font-size: clamp(2.4rem, 12vw, 3.6rem);
   letter-spacing: -0.04em;
-  line-height: 0.95;
   color: var(--text);
-  margin-bottom: 32px;
+  line-height: 0.95;
+  margin-bottom: 24px;
   text-wrap: balance;
 }
 .hero h1 em {
@@ -72,197 +70,236 @@ body {
   font-size: 0.92em;
 }
 .hero .lede {
-  font-size: 1.05rem;
+  font-size: 0.95em;
   color: var(--dim);
-  max-width: 56ch;
-  letter-spacing: -0.005em;
+  max-width: 36ch;
 }
 
-.bottle-stage {
-  margin: 64px 0 96px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
+/* Bottle — small, centered, single column */
+.bottle-block {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 28px 20px 24px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
 }
-@media (max-width: 720px) {
-  .bottle-stage { grid-template-columns: 1fr; gap: 32px; }
+.bottle-block::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bottle-block::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
 }
 .bottle-svg {
   display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 0 60px rgba(57, 255, 122, 0.15));
+  margin: 0 auto 20px;
+  position: relative;
+  max-width: 200px;
+  height: auto;
 }
-.born-block {
-  border-top: 1px solid var(--border-bright);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 0;
+.born-stat {
+  text-align: center;
+  position: relative;
 }
-.born-block .k {
+.born-stat .k {
   font-size: 0.7em;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--dim);
   font-weight: 500;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
-.born-block .v {
-  font-family: 'JetBrains Mono', monospace;
+.born-stat .v {
+  font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-size: clamp(1.6rem, 8vw, 2.2rem);
   letter-spacing: -0.02em;
   color: var(--accent);
   text-shadow: 0 0 24px var(--accent-glow);
   line-height: 1;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
-.born-block .v small {
-  display: block;
-  font-size: 0.32em;
-  letter-spacing: 0.18em;
+.born-stat .desc {
+  font-size: 0.78em;
   color: var(--dim);
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-top: 10px;
-  text-shadow: none;
-}
-.born-block .desc {
-  color: var(--dim);
-  font-size: 0.92em;
-  margin-top: 8px;
-  max-width: 42ch;
+  max-width: 32ch;
+  margin: 0 auto;
 }
 
-.strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* Chain — stacked single column */
+.chain-label {
+  font-size: 0.7em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.chain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--border);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
-  margin-bottom: 96px;
+  margin-bottom: 40px;
 }
-@media (max-width: 720px) { .strip { grid-template-columns: 1fr 1fr; } }
-.step {
-  padding: 28px 20px 28px 0;
-  border-right: 1px solid var(--border);
+.chain-item {
+  background: var(--surface);
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: center;
 }
-.step:last-child { border-right: 0; }
-.step .n {
+.chain-item .num {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 2.2rem;
+  font-size: 1.3rem;
   color: var(--accent);
   letter-spacing: -0.03em;
-  line-height: 1;
 }
-.step .l {
-  font-size: 0.7em;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-top: 10px;
-  font-weight: 500;
-}
-.step .d {
-  font-size: 0.82em;
-  color: var(--text);
-  margin-top: 14px;
-  max-width: 22ch;
-  opacity: 0.75;
-}
-
-section.manifest { margin-bottom: 96px; }
-section.manifest h2 {
+.chain-item .body .l {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
-  font-size: 1.6rem;
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
+  font-size: 0.95rem;
   color: var(--text);
+  letter-spacing: -0.01em;
 }
-section.manifest p { max-width: 64ch; margin-bottom: 16px; }
-section.manifest strong { color: var(--accent); font-weight: 700; }
+.chain-item .body .d {
+  font-size: 0.78em;
+  color: var(--dim);
+  margin-top: 2px;
+}
 
-.actions { display: flex; flex-wrap: wrap; gap: 0; margin: 32px 0 0; }
-.btn {
-  display: inline-flex;
-  align-items: center;
+/* Actions */
+.actions {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  padding: 18px 28px;
+  margin-bottom: 40px;
+}
+.btn {
+  width: 100%;
+  padding: 18px 24px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 0.78em;
+  font-size: 0.82em;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   text-decoration: none;
   border: 2px solid var(--accent);
   background: var(--accent);
   color: var(--bg);
-  transition: all 120ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  touch-action: manipulation;
+  box-shadow: 4px 4px 0 0 rgba(31, 95, 91, 0.22);
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn.outline {
   background: transparent;
   color: var(--accent);
-  margin-left: -2px;
+  box-shadow: none;
 }
-.btn:hover { background: var(--text); border-color: var(--text); }
-.btn.outline:hover { background: transparent; color: var(--text); border-color: var(--text); }
+.btn:hover {
+  box-shadow: 2px 2px 0 0 rgba(31, 95, 91, 0.22);
+  transform: translate(2px, 2px);
+}
+.btn.outline:hover {
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 4px 4px 0 0 rgba(31, 95, 91, 0.22);
+}
+.btn:active {
+  box-shadow: 0 0 0 0 rgba(31, 95, 91, 0.22);
+  transform: translate(4px, 4px);
+}
 .btn:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 4px;
 }
-.step:focus-within { outline: 1px solid var(--border-bright); }
+.btn svg { width: 18px; height: 18px; }
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
 
-code {
+/* Manifesto — single line */
+.manifest {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-bottom: 32px;
+}
+.manifest p {
+  font-size: 0.85em;
+  color: var(--dim);
+  margin-bottom: 12px;
+  max-width: 36ch;
+}
+.manifest strong { color: var(--accent); font-weight: 700; }
+.manifest code {
   font-family: inherit;
-  font-size: 0.9em;
+  font-size: 0.92em;
   color: var(--accent);
   background: var(--surface-2);
   padding: 2px 6px;
   border: 1px solid var(--border);
+  word-break: break-all;
 }
 
 footer {
   border-top: 1px solid var(--border);
-  padding-top: 24px;
+  padding-top: 20px;
   font-size: 0.7em;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--dim);
   text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  text-align: center;
   font-weight: 500;
 }
-footer a { color: var(--accent); text-decoration: none; }
 </style>
 </head>
 <body>
 <div class="shell">
 
-<header class="masthead">
-  <div class="left">Fresh Beer Lab</div>
-  <div class="right"><strong>Tanzania</strong> · 2026</div>
-</header>
+<div class="brand-bar">
+  <span><strong>Fresh</strong> · Lab</span>
+  <span>TZ · 2026</span>
+</div>
 
 <section class="hero">
   <h1>Born on,<em>not best before.</em></h1>
   <p class="lede">Every bottle gets a date. Every outlet gets a score. Discipline becomes the brand.</p>
 </section>
 
-<section class="bottle-stage">
-  <svg class="bottle-svg" width="280" height="380" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bottle with Born On date">
+<div class="bottle-block">
+  <svg class="bottle-svg" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bottle with Born On date">
     <defs>
       <linearGradient id="bottleGlass" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#e8e0d0"/>
-            <stop offset="50%" stop-color="#f4efe6"/>
-            <stop offset="100%" stop-color="#e8e0d0"/>
-          </linearGradient>
-          <linearGradient id="bottleHighlight" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="rgba(31,95,91,0.10)"/>
-            <stop offset="100%" stop-color="rgba(31,95,91,0)"/>
-          </linearGradient>
+        <stop offset="0%" stop-color="#e8e0d0"/>
+        <stop offset="50%" stop-color="#faf6ed"/>
+        <stop offset="100%" stop-color="#e8e0d0"/>
+      </linearGradient>
+      <linearGradient id="bottleHighlight" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(31,95,91,0.12)"/>
+        <stop offset="100%" stop-color="rgba(31,95,91,0)"/>
+      </linearGradient>
     </defs>
     <path d="M120 20 L120 50 Q120 60 115 68 Q95 100 95 140 L95 340 Q95 360 115 360 L165 360 Q185 360 185 340 L185 140 Q185 100 165 68 Q160 60 160 50 L160 20 Z"
           fill="url(#bottleGlass)" stroke="#1f5f5b" stroke-width="1.5"/>
@@ -274,44 +311,71 @@ footer a { color: var(--accent); text-decoration: none; }
     <line x1="105" y1="270" x2="175" y2="270" stroke="#d4c9b0" stroke-width="0.5"/>
     <text x="140" y="208" text-anchor="middle" fill="#7a7568" font-family="JetBrains Mono, monospace" font-size="8" letter-spacing="1.5">FRESH BEER LAB</text>
     <text x="140" y="234" text-anchor="middle" fill="#1f5f5b" font-family="JetBrains Mono, monospace" font-size="13" font-weight="700" letter-spacing="2">BORN ON</text>
-    <text x="140" y="252" text-anchor="middle" fill="#1f5f5b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700">31 AUG 2026</text>
+    <text x="140" y="252" text-anchor="middle" fill="#1f5f5b" font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" id="bottleBorn">31 AUG 2026</text>
     <text x="140" y="266" text-anchor="middle" fill="#7a7568" font-family="JetBrains Mono, monospace" font-size="6" letter-spacing="1.5">DRINK FRESH</text>
     <line x1="40" y1="350" x2="240" y2="350" stroke="#1f5f5b" stroke-width="0.5" opacity="0.25"/>
     <line x1="35" y1="354" x2="245" y2="354" stroke="#1f5f5b" stroke-width="0.5" opacity="0.15"/>
   </svg>
-  <div class="born-block">
+  <div class="born-stat">
     <div class="k">Today's born</div>
-    <div class="v" id="todayBorn">31 AUG 2026<small>Born today, drink fresh</small></div>
+    <div class="v" id="todayBorn">31 AUG 2026</div>
     <p class="desc">If your bottle is older than 9 days, it shouldn't be on the shelf. The QR proves the chain.</p>
   </div>
-</section>
+</div>
 
-<nav class="strip" aria-label="The chain">
-  <div class="step"><h2 class="n">01</h2><div class="l">Born</div><div class="d">Bottle gets a date at the brewery, stamped on the label.</div></div>
-  <div class="step"><h2 class="n">02</h2><div class="l">Tracked</div><div class="d">Distributors scan movement. No silent warehouse aging.</div></div>
-  <div class="step"><h2 class="n">03</h2><div class="l">Scored</div><div class="d">Every outlet gets a freshness score that updates live.</div></div>
-  <div class="step"><h2 class="n">04</h2><div class="l">Verified</div><div class="d">Customer scans QR, sees the chain in real time.</div></div>
-</nav>
+<div class="chain-label">The chain</div>
 
-<section class="manifest">
-  <h2>How it works</h2>
-  <p>QR on every bottle points to <code>fresh.quick.co.tz/scan/?batch=…&outlet=…</code>. Customer scans → server returns the bottle's age, freshness band, and the outlet's score.</p>
-  <p>Outlets with high scores earn the <strong>Fresh Serve Certified</strong> badge. Distribution discipline becomes a marketing asset — not a cost.</p>
-  <div class="actions">
-    <a class="btn" href="/verify/">Open scan demo →</a>
-    <a class="btn outline" href="/badge/?id=O-MAMA001">Sample badge</a>
+<section class="chain" aria-label="The chain">
+  <div class="chain-item">
+    <div class="num">01</div>
+    <div class="body">
+      <div class="l">Born</div>
+      <div class="d">Bottle gets a date at the brewery, stamped on the label.</div>
+    </div>
+  </div>
+  <div class="chain-item">
+    <div class="num">02</div>
+    <div class="body">
+      <div class="l">Tracked</div>
+      <div class="d">Distributors scan movement. No silent warehouse aging.</div>
+    </div>
+  </div>
+  <div class="chain-item">
+    <div class="num">03</div>
+    <div class="body">
+      <div class="l">Scored</div>
+      <div class="d">Every outlet gets a freshness score that updates live.</div>
+    </div>
+  </div>
+  <div class="chain-item">
+    <div class="num">04</div>
+    <div class="body">
+      <div class="l">Verified</div>
+      <div class="d">Customer scans QR, sees the chain in real time.</div>
+    </div>
   </div>
 </section>
 
-<footer>
-  <div>Fresh Beer Lab · TZ · 2026</div>
-  <div>Pilot build</div>
-</footer>
+<div class="actions">
+  <a class="btn" href="/verify/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3M14 18h2"/></svg>
+    Scan demo
+  </a>
+  <a class="btn outline" href="/badge/?id=O-MAMA001">Sample badge</a>
+</div>
+
+<section class="manifest">
+  <p>QR on every bottle points to <code>fresh.quick.co.tz/scan/?batch=…&outlet=…</code>. Outlets with high scores earn the <strong>Fresh Serve Certified</strong> badge. Discipline becomes the brand.</p>
+</section>
+
+<footer>Fresh Beer Lab · TZ · 2026</footer>
 
 </div>
+
 <script>
-document.getElementById('todayBorn').firstChild.textContent =
-  new Date().toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'}).toUpperCase();
+const today = new Intl.DateTimeFormat('en-GB', {day:'2-digit', month:'short', year:'numeric', timeZone: 'Africa/Dar_es_Salaam'}).format(new Date()).toUpperCase();
+document.getElementById('todayBorn').textContent = today;
+document.getElementById('bottleBorn').textContent = today;
 </script>
 </body>
 </html>
