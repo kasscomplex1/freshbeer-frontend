@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#f4efe6">
+<title>VERIFY FRESHNESS · Fresh Beer Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4efe6;
+  --surface: #faf6ed;
+  --surface-2: #ece4d2;
+  --border: #d4c9b0;
+  --border-bright: #b8ad94;
+  --accent: #1f5f5b;
+  --accent-2: #3a8a85;
+  --accent-glow: rgba(31, 95, 91, 0.18);
+  --text: #2c3530;
+  --dim: #7a7568;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: var(--accent); color: var(--bg); }
+html, body { min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  line-height: 1.55;
+  font-size: 15px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  padding: 28px 16px 40px;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+.shell {
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Brand bar */
+.brand-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  padding-bottom: 14px;
+  margin-bottom: 48px;
+}
+.brand-bar strong { color: var(--accent); font-weight: 700; letter-spacing: 0.32em; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.hero .eyebrow {
+  font-size: 0.7em;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 11vw, 3.6rem);
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  text-shadow: 0 0 28px var(--accent-glow);
+  line-height: 1;
+  margin-bottom: 18px;
+  text-wrap: balance;
+}
+.hero p {
+  font-size: 0.92em;
+  color: var(--dim);
+  max-width: 42ch;
+  margin: 0 auto;
+}
+
+/* Live ticker */
+.ticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 auto 48px;
+  max-width: 360px;
+}
+.ticker .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-2);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker .dot { animation: none; }
+}
+
+/* Steps */
+.steps-label {
+  font-size: 0.7em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 48px;
+}
+.step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: start;
+  position: relative;
+  overflow: hidden;
+}
+.step .icon-box {
+  width: 48px;
+  height: 48px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+.step .icon-box svg { width: 24px; height: 24px; color: var(--accent); }
+.step .body { min-width: 0; }
+.step .body h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.step .body p {
+  font-size: 0.85em;
+  color: var(--dim);
+  line-height: 1.5;
+}
+.step .body .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+  margin-bottom: 4px;
+  display: block;
+}
+.step .watermark {
+  position: absolute;
+  bottom: -20px;
+  right: -8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.04;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* CTA — thumb zone, brutalist shadow */
+.cta-zone {
+  margin-top: auto;
+  padding-top: 12px;
+}
+.btn-scan {
+  width: 100%;
+  padding: 24px 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.95em;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  touch-action: manipulation;
+  position: relative;
+  box-shadow: 6px 6px 0 0 rgba(31, 95, 91, 0.22);
+  transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-scan:hover {
+  box-shadow: 4px 4px 0 0 rgba(31, 95, 91, 0.22);
+  transform: translate(2px, 2px);
+}
+.btn-scan:active {
+  box-shadow: 0 0 0 0 rgba(31, 95, 91, 0.22);
+  transform: translate(6px, 6px);
+}
+.btn-scan:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.btn-scan:disabled {
+  background: var(--dim);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.btn-scan svg { width: 22px; height: 22px; }
+@media (prefers-reduced-motion: reduce) {
+  .btn-scan { transition: none; }
+}
+
+.cta-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.7em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  font-weight: 500;
+}
+
+footer.brand-line {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.7em;
+  letter-spacing: 0.22em;
+  color: var(--dim);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="brand-bar">
+  <span><strong>Fresh</strong> · Lab</span>
+  <span>TZ · 2026</span>
+</div>
+
+<section class="hero">
+  <div class="eyebrow">Brewery · Lab · Verification</div>
+  <h1>Verify freshness</h1>
+  <p>Scan the QR code on your bottle to access real-time lab data, brewing journey, and quality metrics.</p>
+</section>
+
+<div class="ticker" aria-live="polite">
+  <span class="dot"></span>
+  Live · <span id="batchCount">5,241</span> batches verified today
+</div>
+
+<div class="steps-label">How it works</div>
+
+<section class="steps" aria-label="Three steps to verify freshness">
+
+  <div class="step">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5" stroke-linecap="round"/></svg>
+    </div>
+    <div class="body">
+      <span class="num">Step 01</span>
+      <h3>Find the code</h3>
+      <p>Locate the unique QR code printed on your bottle's label.</p>
+    </div>
+    <div class="watermark">1</div>
+  </div>
+
+  <div class="step">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3M14 18h2"/></svg>
+    </div>
+    <div class="body">
+      <span class="num">Step 02</span>
+      <h3>Scan</h3>
+      <p>Center the code in your camera view for instant recognition.</p>
+    </div>
+    <div class="watermark">2</div>
+  </div>
+
+  <div class="step">
+    <div class="icon-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V10l4-3 4 3v11M13 21V13l3-2 3 2v8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14v.01M16 17v.01" stroke-linecap="round"/></svg>
+    </div>
+    <div class="body">
+      <span class="num">Step 03</span>
+      <h3>Analyze</h3>
+      <p>Review the detailed freshness metrics and outlet score.</p>
+    </div>
+    <div class="watermark">3</div>
+  </div>
+
+</section>
+
+<div class="cta-zone">
+  <a class="btn-scan" href="/scan/?batch=B-FRESH01&outlet=O-MAMA001" id="scanBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3zM18 18h3v3M14 18h2"/></svg>
+    Scan Here
+  </a>
+  <div class="cta-note">Opens camera · no signup needed</div>
+</div>
+
+<footer class="brand-line">Fresh Beer Lab · Tanzania · 2026</footer>
+
+</div>
+
+<script>
+// Read URL params if present (e.g. user came from a real QR but landed on /verify first)
+const params = new URLSearchParams(location.search);
+const batchId = params.get('batch');
+const outletId = params.get('outlet');
+const btn = document.getElementById('scanBtn');
+if (batchId && outletId) {
+  btn.href = '/scan/?batch=' + encodeURIComponent(batchId) + '&outlet=' + encodeURIComponent(outletId);
+}
+// Live counter — increment visibly so it feels alive
+let count = 5241;
+const counterEl = document.getElementById('batchCount');
+setInterval(() => {
+  if (Math.random() < 0.3) {
+    count++;
+    counterEl.textContent = count.toLocaleString();
+  }
+}, 4000);
+</script>
+</body>
+</html>
