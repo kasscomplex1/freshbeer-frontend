@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4efe6">
 <title>BORN ON — Fresh Beer Lab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +63,7 @@ body {
   line-height: 0.95;
   color: var(--text);
   margin-bottom: 32px;
+  text-wrap: balance;
 }
 .hero h1 em {
   font-style: normal;
@@ -205,6 +207,11 @@ section.manifest strong { color: var(--accent); font-weight: 700; }
 }
 .btn:hover { background: var(--text); border-color: var(--text); }
 .btn.outline:hover { background: transparent; color: var(--text); border-color: var(--text); }
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.step:focus-within { outline: 1px solid var(--border-bright); }
 
 code {
   font-family: inherit;
@@ -280,10 +287,10 @@ footer a { color: var(--accent); text-decoration: none; }
 </section>
 
 <nav class="strip" aria-label="The chain">
-  <div class="step"><div class="n">01</div><div class="l">Born</div><div class="d">Bottle gets a date at the brewery, stamped on the label.</div></div>
-  <div class="step"><div class="n">02</div><div class="l">Tracked</div><div class="d">Distributors scan movement. No silent warehouse aging.</div></div>
-  <div class="step"><div class="n">03</div><div class="l">Scored</div><div class="d">Every outlet gets a freshness score that updates live.</div></div>
-  <div class="step"><div class="n">04</div><div class="l">Verified</div><div class="d">Customer scans QR, sees the chain in real time.</div></div>
+  <div class="step"><h2 class="n">01</h2><div class="l">Born</div><div class="d">Bottle gets a date at the brewery, stamped on the label.</div></div>
+  <div class="step"><h2 class="n">02</h2><div class="l">Tracked</div><div class="d">Distributors scan movement. No silent warehouse aging.</div></div>
+  <div class="step"><h2 class="n">03</h2><div class="l">Scored</div><div class="d">Every outlet gets a freshness score that updates live.</div></div>
+  <div class="step"><h2 class="n">04</h2><div class="l">Verified</div><div class="d">Customer scans QR, sees the chain in real time.</div></div>
 </nav>
 
 <section class="manifest">
