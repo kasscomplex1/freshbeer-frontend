@@ -1,19 +1,131 @@
-<!doctype html><html><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FRESH SERVE CERTIFIED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-body{{margin:0;font-family:system-ui;background:#0a0a0a;color:#d4e8d4;display:flex;align-items:center;justify-content:center;min-height:100vh}}
-.b{{border:3px solid #00ff41;padding:30px 50px;border-radius:12px;text-align:center;background:#111;box-shadow:0 0 30px rgba(0,255,65,.3)}}
-h1{{color:#00ff41;font-size:1.6em;margin:0 0 10px;letter-spacing:2px}}
-.s{{font-size:4em;font-family:monospace;color:#00ff41;font-weight:700;margin:10px 0;text-shadow:0 0 20px rgba(0,255,65,.5)}}
-.band{{display:inline-block;padding:8px 20px;border:1px solid #00ff41;border-radius:4px;color:#00ff41;font-weight:700;letter-spacing:2px;margin-top:10px}}
-.m{{color:#6a8a6a;font-size:.85em;margin-top:14px}}
-</style></head><body>
-<div class="b">
-  <h1>🍺 FRESH SERVE CERTIFIED</h1>
-  <div style="color:#d4e8d4;font-size:1.1em">{name}</div>
-  <div class="m">{area}</div>
-  <div class="s">{score}</div>
+:root {
+  --bg: #0a0a0a;
+  --surface: #0d1410;
+  --border: #1f3a23;
+  --border-bright: #2f5a35;
+  --accent: #39ff7a;
+  --accent-glow: rgba(57, 255, 122, 0.4);
+  --text: #eaffea;
+  --dim: #88a888;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { min-height: 100vh; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.badge {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  padding: 36px 44px;
+  text-align: center;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 0 40px var(--accent-glow), inset 0 0 40px rgba(57, 255, 122, 0.04);
+  position: relative;
+}
+.badge::before, .badge::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--accent);
+}
+.badge::before { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.badge::after { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+.head {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.eyebrow {
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+.outlet-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.outlet-area {
+  font-size: 0.8em;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+.score {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 4.5rem;
+  color: var(--accent);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 4px;
+  text-shadow: 0 0 24px var(--accent-glow);
+}
+.score-of {
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.band {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.meta {
+  margin-top: 24px;
+  font-size: 0.75em;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+</style>
+</head>
+<body>
+<div class="badge">
+  <div class="eyebrow">Fresh Beer Lab · Tanzania</div>
+  <div class="head">Fresh Serve Certified</div>
+  <div class="outlet-name">{name}</div>
+  <div class="outlet-area">{area}</div>
+  <div class="score">{score}</div>
+  <div class="score-of">Out of 100</div>
   <div class="band">{band}</div>
-  <div class="m">{scans} scans · {fresh_pct}% fresh · avg {avg_age} days</div>
-</div></body></html>
+  <div class="meta">{scans} scans · {fresh_pct}% fresh · avg {avg_age} days</div>
+</div>
+</body>
+</html>

@@ -1,58 +1,247 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>FRESH BEER — Scan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0a;--surface:#111;--border:#1a3a1a;--accent:#00ff41;--dim:#6a8a6a;--text:#d4e8d4;--warn:#ffaa00;--bad:#ff4444}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px;max-width:400px;width:100%;margin-bottom:16px}
-h1{color:var(--accent);font-size:1.4em;margin-bottom:8px}
-h2{font-size:1em;color:var(--dim);margin:12px 0 6px;text-transform:uppercase;letter-spacing:1px}
-.born{font-family:monospace;font-size:1.6em;color:var(--accent);text-shadow:0 0 12px rgba(0,255,65,.3);text-align:center;padding:14px;background:#000;border:1px solid var(--border);border-radius:4px;margin:8px 0}
-input,select,button{width:100%;padding:12px;border:1px solid var(--border);background:#000;color:var(--text);font-size:1em;border-radius:4px;font-family:inherit}
-button{background:var(--accent);color:#000;font-weight:700;letter-spacing:1px;cursor:pointer;border:none;margin-top:8px}
-button:active{opacity:.8}
-.result{padding:16px;border-radius:6px;text-align:center;font-weight:700;font-size:1.2em;letter-spacing:1px}
-.fresh{background:rgba(0,255,65,.1);border:1px solid var(--accent);color:var(--accent)}
-.good{background:rgba(255,170,0,.1);border:1px solid var(--warn);color:var(--warn)}
-.bad{background:rgba(255,68,68,.1);border:1px solid var(--bad);color:var(--bad)}
-.score{font-size:2.5em;font-family:monospace;color:var(--accent);font-weight:700}
-.meta{font-size:.85em;color:var(--dim);margin-top:4px}
-.brand{font-family:monospace;color:var(--accent);font-size:.75em;letter-spacing:2px;margin-top:16px;text-align:center}
-.error{color:var(--bad);font-size:.85em;margin-top:8px}
-</style></head><body>
-<div class="card">
-  <h1>🍺 FRESH BEER</h1>
-  <div class="meta">Trace your beer from brewery to glass.</div>
-  <h2>Born On</h2>
+:root {
+  --bg: #0a0a0a;
+  --surface: #0d1410;
+  --surface-2: #050907;
+  --border: #1f3a23;
+  --border-bright: #2f5a35;
+  --accent: #39ff7a;
+  --accent-glow: rgba(57, 255, 122, 0.25);
+  --accent-dim: #1f8a3a;
+  --text: #eaffea;
+  --dim: #88a888;
+  --warn: #ffaa00;
+  --bad: #ff5544;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+::selection { background: var(--accent); color: var(--bg); }
+html, body { min-height: 100%; }
+body {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 15px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  padding: 24px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.shell { max-width: 420px; width: 100%; }
+.brand {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.brand-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.tagline {
+  text-align: center;
+  color: var(--dim);
+  font-size: 0.75em;
+  letter-spacing: 0.06em;
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px 22px;
+  margin-bottom: 16px;
+}
+.panel h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  margin: 20px 0 8px;
+}
+.panel h2:first-child { margin-top: 0; }
+.born {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-bright);
+  text-shadow: 0 0 12px var(--accent-glow);
+  margin-top: 4px;
+  word-break: break-all;
+}
+.value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95em;
+  color: var(--text);
+  padding: 12px 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-top: 4px;
+  word-break: break-all;
+}
+select {
+  width: 100%;
+  padding: 14px 14px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-top: 4px;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%),
+                    linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 36px;
+}
+select:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-primary {
+  width: 100%;
+  margin-top: 16px;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  transition: all 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary:hover { background: var(--text); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { background: var(--dim); cursor: not-allowed; }
+.result-band {
+  padding: 18px 16px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 16px;
+  border: 2px solid;
+}
+.result-band.fresh { background: rgba(57,255,122,0.08); border-color: var(--accent); color: var(--accent); }
+.result-band.good { background: rgba(255,170,0,0.08); border-color: var(--warn); color: var(--warn); }
+.result-band.bad { background: rgba(255,85,68,0.08); border-color: var(--bad); color: var(--bad); }
+.score-display {
+  margin-top: 16px;
+  padding: 20px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.score-display .n {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 3.4rem;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.score-display .l {
+  font-size: 0.7em;
+  color: var(--dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 8px;
+  font-weight: 500;
+}
+.score-meta {
+  margin-top: 12px;
+  font-size: 0.78em;
+  color: var(--dim);
+}
+.error {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--bad);
+  background: rgba(255,85,68,0.08);
+  color: var(--bad);
+  font-size: 0.85em;
+}
+footer.brand-line {
+  margin-top: 32px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+  font-size: 0.7em;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<div class="brand"><span class="brand-dot"></span>FRESH BEER</div>
+<div class="tagline">Trace your beer from brewery to glass.</div>
+
+<div class="panel">
+  <h2>Batch · Born On</h2>
   <div class="born" id="born">—</div>
+
   <h2>Outlet</h2>
-  <div class="meta" id="outletMeta">—</div>
-  <h2>How old is this bottle?</h2>
+  <div class="value" id="outletMeta">—</div>
+
+  <h2>Bottle Age</h2>
   <select id="age">
     <option value="0">Just delivered (0–2 days)</option>
     <option value="5">On the shelf a few days (3–7)</option>
     <option value="14">Been here a while (8–21)</option>
     <option value="30">Old stock (22+)</option>
   </select>
-  <button onclick="submitScan()">REPORT FRESHNESS</button>
+
+  <button class="btn-primary" onclick="submitScan()">Report Freshness</button>
   <div id="error" style="display:none" class="error"></div>
-  <div id="result" style="display:none" class="result"></div>
-  <div id="score" style="display:none" class="card" style="background:#000;margin-top:16px">
-    <h2>This outlet</h2>
-    <div class="score" id="scoreNum"></div>
-    <div id="scoreBand" class="result"></div>
-    <div class="meta" id="scoreMeta"></div>
+  <div id="result" style="display:none" class="result-band"></div>
+
+  <div id="scorePanel" style="display:none">
+    <h2>Outlet Score</h2>
+    <div class="score-display">
+      <div class="n" id="scoreNum">—</div>
+      <div class="l" id="scoreBand">—</div>
+      <div class="score-meta" id="scoreMeta">—</div>
+    </div>
   </div>
 </div>
-<div class="brand">FRESH BEER LAB · TANZANIA</div>
+
+<footer class="brand-line">Fresh Beer Lab · Tanzania · 2026</footer>
+
 <script>
-// Config — point at the API origin
 const API = 'https://api.fauluhost.co.tz';
 
-// Read batch + outlet from URL query string
 const params = new URLSearchParams(location.search);
 const batchId = params.get('batch') || '';
 const outletId = params.get('outlet') || '';
@@ -62,13 +251,24 @@ document.getElementById('outletMeta').textContent = outletId || '—';
 
 async function submitScan(){
   const errEl = document.getElementById('error');
+  const resultEl = document.getElementById('result');
+  const scorePanel = document.getElementById('scorePanel');
+  const btn = document.querySelector('.btn-primary');
+
   errEl.style.display = 'none';
+  resultEl.style.display = 'none';
+  scorePanel.style.display = 'none';
+
   if (!batchId || !outletId){
-    errEl.textContent = 'Missing batch or outlet in QR code. Please contact your retailer.';
+    errEl.textContent = 'Missing batch or outlet in QR. Contact your retailer.';
     errEl.style.display = 'block';
     return;
   }
+
   const age = parseInt(document.getElementById('age').value);
+  btn.disabled = true;
+  btn.textContent = 'Reporting...';
+
   try {
     const r = await fetch(API + '/scan', {
       method: 'POST',
@@ -82,22 +282,29 @@ async function submitScan(){
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
     if (d.error){ throw new Error(d.error); }
-    const res = document.getElementById('result');
-    res.style.display = 'block';
-    res.className = 'result ' + (d.band === 'FRESH' ? 'fresh' : d.band === 'GOOD' ? 'good' : 'bad');
-    res.textContent = d.band + ' · ' + d.age_days + ' days old';
-    const sc = document.getElementById('score');
-    sc.style.display = 'block';
+
+    resultEl.style.display = 'block';
+    const cls = d.band === 'FRESH' ? 'fresh' : d.band === 'GOOD' ? 'good' : 'bad';
+    resultEl.className = 'result-band ' + cls;
+    resultEl.textContent = d.band + ' · ' + d.age_days + ' days old';
+
+    scorePanel.style.display = 'block';
     document.getElementById('scoreNum').textContent = d.outlet_score.score;
     const sb = document.getElementById('scoreBand');
-    sb.className = 'result ' + (d.outlet_score.band.includes('FRESH') ? 'fresh' : d.outlet_score.band.includes('GOOD') ? 'good' : 'bad');
+    sb.className = 'l ' + (d.outlet_score.band.includes('FRESH') ? 'fresh' : d.outlet_score.band.includes('GOOD') ? 'good' : 'bad');
     sb.textContent = d.outlet_score.band;
     document.getElementById('scoreMeta').textContent =
-      d.outlet_score.scans + ' scans · ' + d.outlet_score.fresh_pct + '% fresh · avg age ' + d.outlet_score.avg_age_days + ' days';
+      d.outlet_score.scans + ' scans · ' +
+      d.outlet_score.fresh_pct + '% fresh · avg age ' +
+      d.outlet_score.avg_age_days + ' days';
   } catch (e){
     errEl.textContent = 'Could not reach server: ' + e.message;
     errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Report Freshness';
   }
 }
 </script>
-</body></html>
+</body>
+</html>
